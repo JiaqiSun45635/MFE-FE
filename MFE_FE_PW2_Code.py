@@ -2,32 +2,50 @@ import numpy as np
 import pandas as pd
 
 def oos_rsquared(y,yhat,mu):
-# Out-of-sample R2
-# Produce a function that will compute the out-of-sample R2.
-# r2 = oos_rsquared(y,yhat,mu)
-#Outputs:
-## r2: The out-of-sample R2 (float)
-# Inputs:
-## y: A pandas Series with shape n. The out-of-sample realised value.
-## yhat: A pandas Series with shape n. The forecasts of y. The index of yhat will match that of y,
-### so that observation i of yhat will be the forecast of y in position i.
-## mu: A float. The in-sample mean of the time-series. Essentially a forecast of y assuming that the
-### correct model has a constant mean.
-# return "something"
+    """
+    Compute the out-of-sample R2.
+
+    Parameters:
+    y (pd.Series): Out-of-sample realized values, shape (n,).
+    yhat (pd.Series): Forecasts of y, shape (n,). Indices should match y.
+    mu (float): In-sample mean of the time-series.
+
+    Returns:
+    float: The out-of-sample R2.
+    """
+    # Calculate the numerator RSS
+    numerator = ((yhat - mu) ** 2).sum()
+    
+    # Calculate the denominator TSS
+    denominator = ((y - mu) ** 2).sum()
+    
+    # Compute the out-of-sample R2
+    r2 = numerator / denominator
+    
+    return r2
 
 def oos_residuals(y, x, beta, first, last):
-# Out-of-Sample Residual Construction
-# Compute out-of-sample residuals for values stored in a Series where regressors are a DataFrame and
-### parameters are a Series.
-# resid = oos_residuals(y, x, beta, first, last)
-# Outputs:
-## resid: A pandas Series with shape n. The value of Y − Xbβ for the relevant sample.
-# Inputs:
-## y: A pandas Series with shape T . y will have a DatetimeIndex.
-## x: A pandas DataFrame with shape T by k. The index of x will match y.
-## beta: A pandas Series with shape k. The regression coefficients. The index of beta will match the
-### column names of x.
-## first: A date in string format, e.g. "1970" or "1974-03-01".
-##last: A date in string format, e.g. "1980" or "1979-03-01".
-# Note: You should return the residuals only for the sample bracketed by first and last (inclusive).
-# return w[0], w[1], z
+    """
+    Compute out-of-sample residuals for a given range of dates.
+
+    Parameters:
+    y (pd.Series): A pandas Series with shape T (outcome variable) and a DatetimeIndex.
+    x (pd.DataFrame): A pandas DataFrame with shape T by k (regressors) and a DatetimeIndex matching `y`.
+    beta (pd.Series): A pandas Series with shape k (regression coefficients) and index matching columns of `x`.
+    first (str): Start date (inclusive) in string format (e.g., "1970" or "1974-03-01").
+    last (str): End date (inclusive) in string format (e.g., "1980" or "1979-03-01").
+
+    Returns:
+    pd.Series: Residuals (y - Xβ) for the sample bracketed by `first` and `last`.
+    """
+    # Slice the data to include only the rows between `first` and `last`
+    y_sample = y[first:last]
+    x_sample = x[first:last]
+    
+    # Calculate predicted values (Xβ)
+    y_pred = x_sample.dot(beta)
+    
+    # Compute residuals (y - Xβ)
+    resid = y_sample - y_pred
+    
+    return resid
