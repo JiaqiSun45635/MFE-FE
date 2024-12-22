@@ -24,7 +24,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = os.getcwd()
-FILENAME = "solutions-pw2.py"
+# FILENAME = "solutions-pw2.py"
+FILENAME = "group-solutions-pw2.py"
 FILE = os.path.join(ROOT, FILENAME)
 mod = SourceFileLoader(FILENAME.split(".py")[0], FILE).load_module()
 
