@@ -14,13 +14,13 @@ def oos_rsquared(y,yhat,mu):
     float: The out-of-sample R2.
     """
     # Calculate the numerator RSS
-    numerator = ((yhat - mu) ** 2).sum()
+    numerator = ((y - yhat) ** 2).sum()
     
     # Calculate the denominator TSS
     denominator = ((y - mu) ** 2).sum()
     
     # Compute the out-of-sample R2
-    r2 = numerator / denominator
+    r2 = 1 - numerator / denominator
     
     return r2
 
