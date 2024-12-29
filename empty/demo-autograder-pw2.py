@@ -19,6 +19,7 @@
 import glob
 import os
 from importlib.machinery import SourceFileLoader
+import matplotlib.pyplot as plt
 
 import numpy as np
 import pandas as pd
@@ -53,9 +54,20 @@ k_max = 7
 columns = [f"x{i}" for i in range(1, k_max + 1)]
 x = pd.DataFrame(rg.standard_normal((250, k_max)), columns=columns, index=index)
 beta = pd.Series(np.ones(k_max), index=columns)
-first = "1955"
-last = "1965"
+first = "1950"
+last = "1970"
 resid = mod.oos_residuals(y, x, beta, first, last)
 assert isinstance(resid, pd.Series)
 assert resid.shape == y[first:last].shape
 
+
+# %%
+plt.scatter(x["x2"], resid, color='blue', alpha=0.5, label="Residuals vs Predicted")
+plt.axhline(0, color="red", linestyle="--", linewidth=1, label="Zero Line")
+plt.title("Scatter Plot of Residuals vs Predicted Values")
+plt.xlabel("Predicted Values")
+plt.ylabel("Residuals")
+plt.legend()
+plt.grid()
+plt.show()
+# %%
