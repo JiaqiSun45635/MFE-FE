@@ -1,0 +1,26 @@
+name: Compile LaTeX Document
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up TeX Live
+      uses: dante-ev/latex-action@v2
+      with:
+        root_file: problem-2-write-up/problem-2-writeup.tex
+        compiler: pdflatex
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: compiled-pdf
+        path: main.pdf
