@@ -16,6 +16,9 @@ jobs:
       - name: Set up TeX Live
         run: sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
 
+      - name: Install siunitx package
+        run: tlmgr install siunitx
+
       - name: Create output directory
         run: mkdir -p output
 
