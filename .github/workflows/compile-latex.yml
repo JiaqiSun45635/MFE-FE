@@ -16,6 +16,9 @@ jobs:
       - name: Set up TeX Live
         run: sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
 
+      - name: Create output directory
+        run: mkdir -p output
+
       - name: Compile LaTeX to PDF
         run: pdflatex -interaction=nonstopmode -output-directory=output problem-2.tex
 
