@@ -1,0 +1,467 @@
+% AER-Article.tex for AEA last revised 22 June 2011
+\documentclass[AER]{AEA}
+\usepackage{siunitx}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{adjustbox}
+\usepackage{caption}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{multirow}
+\usepackage{cancel}
+\usepackage{lastpage}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage{fancyhdr} 
+\usepackage{array,  ragged2e,  booktabs}
+\usepackage{float}
+\usepackage{threeparttable} % Required for tablenotes
+\usepackage{booktabs} 
+\usepackage{enumitem}
+%\usepackage{tikz}
+%\usepackage{pgfplots}
+\usepackage{verbatim}
+\usepackage{threeparttable}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage[normalem]{ulem}
+\setlength{\footskip}{30pt}
+\titlespacing*{\section}{0pt}{0.1\baselineskip}{0.2\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.1\baselineskip}{0.2\baselineskip}
+\restylefloat{table}
+
+\renewcommand{\footnoterule}{%
+  \kern -3pt
+  \hrule width \textwidth height 1pt
+  \kern 2pt
+}
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\newcolumntype{M}{>{\centering\arraybackslash}m{6.1cm}}
+
+\usepackage{csquotes}% Recommended
+
+\usepackage[style=authoryear-ibid,backend=biber]{biblatex}
+
+\addbibresource{citation.bib}
+
+%%%%%% NOTE FROM OVERLEAF: The mathtime package is no longer publicly available nor distributed. We recommend using a different font package e.g. mathptmx if you'd like to use a Times font.
+\usepackage{mathptmx}
+
+% Note that miktex, by default, configures the mathtime package to use commercial fonts
+% which you may not have. If you would like to use mathtime but you are seeing error
+% messages about missing fonts (mtex.pfb, mtsy.pfb, or rmtmi.pfb) then please see
+% the technical support document at http://www.aeaweb.org/templates/technical_support.pdf
+% for instructions on fixing this problem.
+
+% Note: you may use either harvard or natbib (but not both) to provide a wider
+% variety of citation commands than latex supports natively. See below.
+
+% Uncomment the next line to use the natbib package with bibtex 
+%\usepackage{natbib}
+
+% Uncomment the next line to use the harvard package with bibtex
+%\usepackage[abbr]{harvard}
+
+\begin{document}
+\pagestyle{empty}
+\vspace*{\fill}
+\begin{spacing}{2}
+\begin{center}
+Candidate Numbers:  \\
+
+Financial Econometrics Practical Work 2 \\
+
+Word Limit: / 3750 words
+\end{center}
+\vspace*{\fill}
+\newpage
+
+\pagestyle{fancy}
+
+\setcounter{page}{1}
+
+\fancyhf{} % Clear all headers and footers
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\cfoot{\thepage\ of \pageref{LastPage}} % Page numbers in the center footer
+
+\section{Problem 1}
+
+(Problem 1 write-up here)
+
+\section{Problem 2}
+
+In this problem, we:
+\begin{enumerate}
+    \item Construct and optimise models to track factor returns on the Value and Momentum portfolios using returns on French's 17 Industry Portfolios;
+    \item Compare how well the positively-weighted ``long side", negatively-weighted ``short side", and overall return for each factor can be tracked by the Industry Portfolios;
+    \item Determine if a combination of optimal models better replicate factor returns than individual component models.
+\end{enumerate} 
+
+The Value factor \textcolor{blue}{argues that stocks with high book-to-market ratio (value stocks) would outperform stocks with low book-to-market ratio (growth stocks)}. \textcolor{blue}{Its return ($HML$ in equation \ref{eq:1}) is calculated as the }averages the premium of ``value stocks" over ``growth stocks" across firms with low and high market equity (``small" and ``big")\sout{ — a comparison of returns of stocks trading at high book equity to market equity (potential undervaluation) to those trading at low book equity to market equity (potential to outperform overall market growth), controlled for market equity (size). The Value factor addresses the question of how much additional value the market places on stocks with lower growth and higher valuation over those with higher growth but lower valuation}  
+\begin{equation}
+    HML=\frac{1}{2}(Small\text{-}Value+Big\text{-}Value)-\frac{1}{2}(Small\text{-}Growth+Big\text{-}Growth)\label{eq:1}
+\end{equation}
+
+The Momentum factor ($MOM$) averages the premium of ``high momentum stocks" over ``low momentum stocks" across small and big firms. This compares current returns of stocks with high prior monthly returns to those with low prior monthly returns, controlled for market equity (size). The Momentum factor addresses the question of how much additional value the market places on stocks with higher historical growth, as this may indicate continued high growth in future.
+\begin{equation}
+    MOM=\frac{1}{2}(Small\text{-}High\text{ }Momentum+Big\text{-}High\text{ }Momentum)-\frac{1}{2}(Small\text{-}Low\text{ }Momentum+Big\text{-}Low\text{ }Momentum)\label{eq:2}
+\end{equation}
+
+\textcolor{blue}{The returns of long-side (Value in HML and High Momentum in MOM) and short-side (Growth in HML and Low Momentum in MOM) of each factor returns are derived from French's 6 Size-Value portfolios and 6 Size-Momentum portfolios. However, the factor returns of Value and Momentum are directly extracted from Fama/French 3 Factors and Momentum Factor (Mom) from Ken French’s site.}
+
+The 17 Industry Portfolios compare market returns across industries, where stocks are categorised into portfolios by industry SIC code. The focus of this problem is how well these portfolios can replicate Value and Momentum returns and how this can be achieved.
+
+\subsection{Question 1}
+
+We have constructed \textcolor{blue}{out-of-sample (OOS)} tracking portfolios, comprising some or all of the 17 Industry Portfolios as regressors, \textcolor{blue}{for} \sout{to replicate} Value and Momentum portfolio returns \sout{on an out-of-sample (OOS) basis}. \textcolor{red}{The wording of the next two sentences confuses me. }This involves training the tracking model using different data from that used to test how well the model fits observed data. Optimising the tracking portfolio requires the use of model selection procedures, which iterate through combinations of the Industry Portfolios to determine which combination of regressors best tracks Value and Momentum portfolio returns. The best two tracking portfolios for each factor are selected by comparing their OOS residual variances, with the OOS variance of the Value and Momentum portfolio returns used as a benchmark.
+
+Different tracking portfolios are constructed using the following procedures:
+\begin{itemize}
+    \item Forward \& Hybrid Stepwise Linear Regression
+    \item Ridge Regression
+    \item Least Absolute Shrinkage and Selection Operator (LASSO) Regression
+    \item Random Forests
+\end{itemize}
+
+For each of the procedures, every tracking portfolio is trained and tested using the following windows of data, which move forward on a 5-year rolling basis:
+\begin{itemize}
+    \item Train for 5 years, test predictions for following 5 years
+    \item Train for 10 years, test predictions for following 5 years
+    \item Train for 20 years, test predictions for following 5 years
+\end{itemize}
+
+\textcolor{red}{These equations would not apply to Random Forest, should we mention in a brief sentence that Random Forest would not have a functional form, but the way of calculating SSE and assessing model accuracy is the same}
+
+The training equation is:
+\begin{equation} Y_i=\hat{\beta}_1X_{1,i}+{...}+\hat{\beta}_{k}X_{k,i}+\epsilon_i\label{eq:3}
+\end{equation}
+which produces estimated parameters \(\hat{\beta}\). $Y_i$ are tracked returns on the Value or Momentum portfolios for observation $i$.
+
+\textcolor{red}{I think predictions etc. do not have the error term? Also, I think we can remove everything until equation 5 (inclusive) (okay if you compile its gonna be equation 7 lol because I added two equations in between). The notations are a bit confusing to me. I propose we do:}
+
+\textcolor{blue}{For in-sample testing, we compute 
+\begin{equation} \hat{Y_i}=\hat{\beta}_1X_{1,i}+{...}+\hat{\beta}_{k}X_{k,i}\label{eq:4}
+\end{equation}
+where $X_{1,i},\cdots,X_{k,i}$ are in the training data.
+For OOS testing, \begin{equation} \tilde{Y}_j=\hat{\beta}_1X_{1,j}+{...}+\hat{\beta}_{k}X_{k,j}\label{eq:5}
+\end{equation} where $X_{1,j},\cdots,X_{k,j}$ were not used in training the model.}
+
+\textcolor{red}{If we use the blue text have to make sure to change all $\tilde{Y}_i$ to $\tilde{Y}_j$}
+
+\sout{Predicted values of $Y_i$ used for testing are computed:
+\begin{equation} \hat{Y_i}=\hat{\beta}_1X_{1,i}+{...}+\hat{\beta}_{k}X_{k,i}+\hat{\epsilon}_i\label{eq:4}
+\end{equation}
+for in-sample testing, where \(Y_i\) and \(\hat{Y_i}\) are drawn from the same data as for model training; and
+\begin{equation} \tilde{Y_i}=\hat{\beta}_1X_{1,i}+{...}+\hat{\beta}_{k}X_{k,i}+\tilde{\epsilon}_i\label{eq:5}
+\end{equation}
+for OOS testing. Here, tracked returns \(\tilde{Y}_i\) are first predicted using \(X_{k,i}\), the OOS value of each observation of the $k$th regressor, and the estimated parameters from training, $\hat{\beta}$. Predictions are then compared to actual observations $Y_i$. \(Y_i\) and \(X_{k,i}\) are drawn from a different dataset from that used for model training (OOS data).}
+
+\(\epsilon_i\) are the residuals, the part of each observation $i$ that is unexplained by the model. The variance of the model is measured by the Sum of Squared Errors (SSE), which is derived from the residuals:
+
+\begin{equation}
+    In\text{-}sample \text{ }SSE=\hat{\sigma}^2=\sum_{i=1}^n\hat{\epsilon}_i^2=\sum_{i=1}^n(Y_i-\hat{Y_i})^2\label{eq:6}
+    \end{equation}
+\begin{equation}
+    Out\text{-}of\text{-}sample \text{ $(OOS)$ }SSE=\tilde{\sigma}^2=\sum_{i=1}^n\tilde{\epsilon}_i^2=\sum_{i=1}^n(Y_i-\tilde{Y_i})^2\label{eq:7}
+    \end{equation}
+
+The lower the SSE, the better the tracking model fits observed data; there is a smaller difference between an observed data point and its corresponding prediction by the model.
+
+To compare the fit of the tracking model to actual observed Value and Momentum returns, we modify the SSE to derive the following metrics for OOS testing:
+
+\begin{itemize}
+    \item R-squared, \(R^2\): Larger \(R^2\) indicates that a larger proportion of each observation can be accounted for by the model, and therefore reflects better model fit.
+
+    \begin{equation}
+        R^2=1-\frac{\sum_{i=1}^n(Y_i-\tilde{Y}_i)}{\sum_{i=1}^n(Y_i-\bar{Y}_i)}=1-\frac{SSE}{TSS}
+    \end{equation}
+
+    \item Bayesian Information Criteria (BIC): Smaller BIC indicates that a larger proportion of each observation can be accounted for by the model with the fewest regressors utilised.
+\begin{equation} BIC=\ln\left(\frac{1}{n}\sum_{i=1}^n(Y_i-\tilde{Y_i})^2\right)+\frac{k\;\ln(n)}{n}=\ln\left(\frac{1}{n}SSE\right)+\frac{k\;\ln(n)}{n}\label{eq:7}
+\end{equation}
+\end{itemize}
+where $n$ is the number of observations of $Y_i$ and $k$ is the number of regressors in the tracking model.
+
+The BIC is a derivative of the SSE which includes a penalty for each additional regressor. The BIC \textcolor{blue}{and $R^2$ are} is computed using OOS data here for model testing.
+
+\subsubsection{Forward \& Hybrid Stepwise Regression}
+
+In Forward Stepwise Regression, linear models are built by adding a single regressor at a time until the maximum number of regressors (17 in this case) is reached. The regressor chosen at each step is the one which minimises the in-sample SSE when added to the combination of regressors from the step before.  At the end of the procedure, we obtain a set of linear regression models ranging from 1 to 17 regressors.
+
+These are trained using 5, 10, and 20 years of data. After each type of training, they are tested using OOS data, as described in the section above. The model which maximises the OOS \(R^2\) and minimises BIC is chosen as the optimal model for Forward Stepwise Regression.
+
+These steps are repeated for Hybrid Stepwise Regression. This selects models by completing Forward Stepwise Regression, followed by removing regressors one by one until a univariate model is obtained (Backward Stepwise Regression). The choice of which regressor to remove depends on which choice minimises in-sample SSE, as in Forward Stepwise Regression.
+
+Intuitively, Forward \& Hybrid Stepwise Regressions are used to systematically build and assess OOS model fit by iterating through different combinations of the 17 regressors. Re-optimising the model as each additional regressor is added reduces the number of combinations to be considered, making this procedure computationally simplified.
+
+\subsubsection{Ridge Regression}
+
+ Standard ordinary least squares (OLS) estimators \(\hat{\beta}\) are derived by minimising the SSE of the linear regression, \(\hat{\epsilon_i}^2\), from Equation \ref{eq:2}. Ridge Regression shrinks OLS estimators, dampening the effect of individual regressors in a model. This minimises the model's sensitivity to changes in data. When different sets of data are used for model training and testing, any variation in data has minimal impact on model fit, allowing Ridge Regression models to outperform standard OLS models.
+
+This is achieved by adding a penalty term to the standard OLS derivation of estimators:
+
+\begin{equation}  \hat{\beta}^{Ridge}=\underset{\beta}{argmin}\;(Y-X\beta)'(Y-X\beta)\;+\;\lambda^{Ridge}\sum_{j=2}^k(\beta_j^2)
+\end{equation}
+
+where \(\lambda^{Ridge}\), the tuning parameter, is selected as a representation of the trade-off between variance and bias in the model. This is achieved in our procedure by selecting the \(\lambda^{Ridge}\) with the lowest OOS SSE.
+
+All 17 regressors are included in the Ridge Regression model. The \(R^2\) and BIC are computed using residuals from the modified linear regression. 
+
+\subsubsection{LASSO Regression}
+
+While similar in concept to Ridge Regression, the penalty term assigned in LASSO Regression may shrink certain estimated OLS parameters $\hat{\beta}$ to zero, effectively removing them from the regression altogether. It therefore selects variables in or out of models, whilst Ridge Regression merely modifies the effect of these variables on the overall model fit.
+
+Estimated parameters \(\hat{\beta}\) are defined:
+\begin{equation}  \hat{\beta}^{LASSO}=\underset{\beta}{argmin}\;(Y-X\beta)'(Y-X\beta)\;+\;\lambda^{LASSO}\sum_{j=2}^k\vert\beta_j^2\vert
+\end{equation}
+where tuning parameter \(\lambda^{LASSO}\) is selected manually, as in Ridge Regression. We begin with a standard OLS model with all 17 regressors and the penalty to select the most relevant variables. The \(R^2\) and BIC are derived accounting for the additional penalty term.
+
+\subsubsection{Random Forests}
+
+Random Forest is a nonparametric model that generates multiple training sets by randomly sampling from the original training set (bootstrapping). For each bootstrapped sample dataset, Random Forest builds a regression tree, done by picking a predictor and some threshold $s$, and splitting each observation based on whether the value of that predictor for that observation is above or below the threshold. Now observations are categorised into two sets (called ``nodes"), and for each node we continue splitting until a certain number of observations are left in each node (called ``leaves"). We predict response value based on the mean response of each leaf. The effect of bootstrapping is to reduce variance in the final model by averaging the predicted values of the generated trees to generate the final set of predicted values for the model. These are then used to generate the mean squared error (MSE), where MSE is the SSE adjusted as follows:
+
+\begin{equation}
+    MSE=\frac{1}{n}SSE=\frac{1}{n}\sum_{i=1}^n(Y_i-\hat{Y_i})^2
+\end{equation}
+
+Since Random Forest is nonparametric we cannot define a functional form for it, and we do not have a set number of predictors for the entire model, since each tree can have different numbers of splits based on the predictors chosen and the values in the bootstrapped sample. However, an unconstrained tree usually grows very big, where each leaf ends up with very few samples. This can lead to overfitting and inaccurate OOS predictions.
+
+To counteract this, we set limits on how the tree is constructed: for each tree, we use only a subset of the total number of predictors, $p$. Here we have set $\sqrt{p} = \sqrt{17}$ as our limit to reduce overfitting. The predictors for each model are randomly chosen from the 17 Industry Portfolios; this ensures low correlation between trees, which maximises the reduction in variance that we achieve through the bootstrapping procedure.
+
+We test a series of possible hyperparameters for construction of the Random Forest:
+\begin{itemize}
+    \item Number of trees: 50, 100, 200
+    \item Maximum depth (number of splits) per tree: None, 10, 20, 30
+    \item Minimum samples to split a node: 2, 5, 10
+    \item Minimum samples per leaf: 1, 2, 4
+\end{itemize}
+
+These hyperparameters are then tuned by iterating through them. The optimal parameters those with the highest number of occurrences over the series of Random Forests created. We then derive the \(R^2\) and BIC for this model.
+
+\subsubsection{Summary}
+
+We compute the \(R^2\) and BIC for the best model selected by Forward \& Hybrid Linear Regression, Ridge Regression and the models constructed by LASSO Regression, and Random Forests to determine which model has the best fit for each of the Value and Momentum factors under the three different durations of model training.
+
+Models are ranked from smallest to largest value for \(R^2\) and largest to smallest value for BIC. Their overall ranking is computed by averaging these two rankings. The best two models for every factor and duration of training data have the two best overall rankings. In the event of a tie in overall rankings, the model with the higher \(R^2\) is chosen. The results are reported in Table 1: selected regressors for Linear models, tuning parameters for Ridge and LASSO models, and selected hyperparameters for Random Forest.
+
+\begin{spacing}{1}
+\begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{ccccc}
+    \multicolumn{5}{l}{\textbf{Table 1: Linear, Ridge, LASSO, and Random Forest Model Selection Results for Value and Momentum Returns}}\\
+    \hline
+    Value & Linear & Ridge & LASSO & Random Forest \\
+     \hline
+    5-Year Training Data & Trans, Machn, Steel, Finan, Other & $\lambda=100$ & $\lambda=0.316$ & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}
+       Number of trees = 50 \\
+       Min samples to split = 2 \\
+       Min samples per leaf = 1 \\
+       Max depth = 8
+\end{tabular}} \\ 
+    &&&&\\
+    &&&&\\
+    &&&&\\
+    10-Year Training Data & Trans, Machn, Steel, Finan, Other, Cars & $\lambda=100$ & $\lambda=0.1$ & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}
+       Number of trees = 50 \\
+       Min samples to split = 2 \\
+       Min samples per leaf = 1 \\
+       Max depth = 10
+\end{tabular}} \\ 
+    &&&&\\
+    &&&&\\
+    &&&&\\
+    20-Year Training Data & All industries in the 17 Industry Portfolios except Food & $\lambda=0.01$ & $\lambda=0.01$ & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}
+       Number of trees = 50 \\
+       Min samples to split = 2 \\
+       Min samples per leaf = 1 \\
+       Max depth = 20
+\end{tabular}} \\ 
+    &&&&\\
+    &&&&\\
+    &&&&\\
+    \hline
+    Momentum & Linear & Ridge & LASSO & Random Forest\\
+    \hline
+    5-Year Training Data & Trans, Cnstr & $\lambda=1,000$ & $\lambda=10$ & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}
+       Number of trees = 50 \\
+       Min samples to split = 10 \\
+       Min samples per leaf = 4 \\
+       Max depth = 20
+\end{tabular}} \\ 
+    &&&&\\
+    &&&&\\
+    &&&&\\
+    10-Year Training Data & Trans & $\lambda=10,000$ & $\lambda=316.23$ & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}
+       Number of trees = 50 \\
+       Min samples to split = 10 \\
+       Min samples per leaf = 4 \\
+       Max depth = 20
+\end{tabular}} \\ 
+    &&&&\\
+    &&&&\\
+    &&&&\\
+    20-Year Training Data & Trans & $\lambda=10,000$ & $\lambda=1,000$ & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}
+       Number of trees = 50 \\
+       Min samples to split = 10 \\
+       Min samples per leaf = 4 \\
+       Max depth = 10
+       \end{tabular}}\\
+       &&&&\\
+    &&&&\\
+    &&&&\\
+       \hline
+    \end{tabular}
+    }
+\end{table}
+\end{spacing}
+
+Therefore, the following model selection procedures produce tracking models with the best fit for the Value and Momentum factor returns:
+
+\begin{spacing}{1}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \multicolumn{3}{l}{\textbf{Table 2: Summary of best OOS Models}}\\
+    \hline
+    & Value & Momentum \\
+     \hline
+     5-year Trained Linear Model & Linear Regression, Ridge Regression & Linear Regression, Ridge Regression \\
+    \hline
+    10-year Trained Linear Model & Linear Regression, LASSO Regression & LASSO Regression, Random Forest \\
+    \hline
+    20-year Trained Linear Model & Linear Regression, LASSO Regression & LASSO Regression, Random Forest \\
+    \hline
+    \end{tabular}
+\end{table}
+\end{spacing}
+
+Linear models with regressors selected by Forward \& Hybrid Stepwise Regression are consistently a good fit for Value returns, while optimised models change depending on duration of training data for Momentum returns. Linear models provide the best fit for shorter durations of training data (5 years) while LASSO models outperform them for longer periods of training.
+
+
+\subsection{Question 2}
+
+Observe from Equations \ref{eq:1} and \ref{eq:2} that the factor returns for Value and Momentum comprise a positively-weighted ``long-side" and a negatively-weighted ``short-side". These can be tracked separately from each other and the overall factor return.
+
+To compare the ease of tracking the long-side, short-side, and overall returns, we leverage the best models identified in Question 1 for each factor and duration of training data. We further refine model selection within the 6 chosen models for each factor by ranking them in descending order of OOC \(R^2\) and ascending order of OOC BIC, and averaging these two rankings. The best two models (best average rankings) across all durations of training data are selected to be used in this analysis.
+
+\subsubsection{Value}
+
+The best two models for the Value factor are the Linear Regression models trained over 10-years and 20-years of data, with regressors selected as shown in Table 1.
+
+\begin{spacing}{1}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \multicolumn{4}{l}{\textbf{Table 3: \(R^2\) of Long-Side, Short-Side \& Overall Returns of Value Factor}}\\
+    \hline
+    & $SV+BV$ & $SG+BG$ & $HML$ \\
+     \hline
+    10-year Trained Linear Model & 0.859 & 0.914 & 0.486 \\
+    \hline
+    20-year Trained Linear Model & 0.872 & 0.924 & 0.565 \\
+    \hline
+    \end{tabular}
+\end{table}
+\end{spacing}
+
+From Table 3, model fit is consistently better for the short-side of the Value factor than the long-side, and both significantly outperform the fit of overall returns.
+
+\subsubsection{Momentum}
+
+The best two models for the Value factor are the LASSO Regression models trained over 10-years and 20-years of data, with tuning parameter \(\lambda^{LASSO}\) selected as shown in Table 1.
+
+\begin{spacing}{1}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \multicolumn{4}{l}{\textbf{Table 4: \(R^2\) of Long-Side, Short-Side \& Overall Returns of Momentum Factor}}\\
+    \hline
+    & $SH+BH$ & $SL+BL$ & $MOM$ \\
+     \hline
+    10-year Trained LASSO Model & -0.076 & -0.014 & -0.006 \\
+    \hline
+    20-year Trained LASSO Model & -0.076 & -0.014 & 0.457 \\
+    \hline
+    \end{tabular}
+\end{table}
+\end{spacing}
+
+From Table 4, model fit is consistently better for the short-side of the Momentum factor than the long-side. Fit for overall returns outperforms that of the long-side and short-side independently. We note that \(R^2\) values for both 10- and 20-year trained models are identical and that some \(R^2\) values are negative; although this implies that model fit is not optimal, these models still provide the best fit across the model selection procedures we have used.
+
+\subsubsection{Summary}
+
+The ability of models to track individual components of Value and Momentum returns tend to outperform that of overall returns, with tracking of the short-side outperforming the long-side.
+
+\subsection{Question 3}
+
+We have now identified two optimised tracking models for each of the Value and Momentum factors, as well as their long- and short-side components. Would a combination forecast, averaging predictions from both models, outperform individual models in the ability to track OOS returns?
+
+The combined forecast is defined as:
+\begin{equation}
+    \tilde{Y}_{t+1}=\frac{1}{2}\sum_{i}^2\tilde{Y}_{i,t+1}
+\end{equation}
+where $i$ is each of the two optimal methods.
+
+To determine if the model fit improves under the combined model, we compare the \(R^2\) of individual methods with that of the combined forecast model.
+
+\subsubsection{Value}
+
+The \(R^2\) values for each of the optimised models and their combination are shown in Table 5.
+
+\begin{spacing}{1}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \multicolumn{4}{l}{\textbf{Table 5: \(R^2\) of 10-year Linear Model, 20-year Linear Model \& Combined Model for Value Factor}}\\
+    \hline
+    & $SV+BV$ & $SG+BG$ & $HML$ \\
+     \hline
+    10-year Trained Linear Model & 0.859 & 0.914 & 0.486 \\
+    \hline
+    20-year Trained Linear Model & 0.872 & 0.924 & 0.565 \\
+    \hline
+    Combined Model & 0.879 & 0.928 & 0.514 \\
+    \hline
+    \end{tabular}
+\end{table}
+\end{spacing}
+
+\subsubsection{Momentum}
+
+The \(R^2\) values for each of the optimised models and their combination are shown in Table 6.
+
+\begin{spacing}{1}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \multicolumn{4}{l}{\textbf{Table 6: \(R^2\) of 10-year LASSO Model, 20-year LASSO Model \& Combined Model for Momentum Factor}}\\
+    \hline
+    & $SH+BH$ & $SL+BL$ & $MOM$ \\
+     \hline
+    10-year Trained LASSO Model & -0.076 & -0.014 & -0.006 \\
+    \hline
+    20-year Trained LASSO Model & -0.076 & -0.014 & 0.457 \\
+    \hline
+    Combined Model & -0.076 & -0.014 & -0.006 \\
+    \hline
+    \end{tabular}
+\end{table}
+\end{spacing}
+
+\subsubsection{Summary}
+
+A combination of models improves the tracking ability of individual optimal models for the long- and short-side components of the Value factor, as reflected by the higher \(R^2\) values, although the difference is minimal between the 20-year trained model and the combined model. However, the 20-year model is marginally better at tracking overall returns than the combined model, and also outperforms the 10-year model.
+
+For the Momentum factor, the combined model produces identical \(R^2\) values to both individual models for the long- and short-side components, which is expected, as their \(R^2\) values are the same. Overall returns under the combined model are predicted similarly to the 10-year model, which has a poorer fit than the 20-year model.
+
+Results from the Momentum factor suggest little about the effect of combining individual optimised models on ability to replicate returns using a tracking portfolio, given the identical \(R^2\) values of the individual methods. We draw conclusions from the Value factor: combined models can sometimes outperform individual models, but this only holds for individual models which already have good tracking ability (around 0.8 to 1 \(R^2\) values). Individual models with poor or average fit (closer to 0.5 \(R^2\)) outperform their combination.
+
+\newpage
+
+\printbibliography
+\end{spacing}
+
+\end{document}
