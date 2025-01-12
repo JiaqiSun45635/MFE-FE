@@ -13,8 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up TeX Live
-        run: sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+      - name: Install TeX Live full
+        run: sudo apt-get update && sudo apt-get install -y texlive-full
 
       - name: Install siunitx package
         run: tlmgr install siunitx
